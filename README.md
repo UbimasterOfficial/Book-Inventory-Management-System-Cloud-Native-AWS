@@ -2,12 +2,12 @@
 
 ## Ongoing Project............. 😋🤞
 
-Tech Stack:
+### Tech Stack:
 - React + Vite
 - Node.js + Express
 - MySQL
 
-MySQL Table:
+### MySQL Table:
 
 CREATE DATABASE book_inventory;
 
@@ -20,19 +20,19 @@ CREATE TABLE books(
  price DECIMAL(10,2)
 );
 
-Backend:
+### Backend:
 cd Backend
 npm install
 copy .env.example .env
 npm run dev
 
-Frontend:
+### Frontend:
 cd Frontend
 npm install
 copy .env.example .env
 npm run dev
 
-Deployment:
+### Deployment:
 Frontend -> S3 + CloudFront
 Backend -> EC2
 Database -> RDS MySQL
