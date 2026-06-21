@@ -35,6 +35,9 @@ export default function App() {
     load();
   };
 
+
+
+
   return (
     <div className="page">
       {/* HEADER */}

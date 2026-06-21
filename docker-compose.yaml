@@ -10,19 +10,19 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql  # Mount the initialization script to create the database and tables
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_ROOT_PASSWORD:-Madusha123}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
+
 
   backend:
     build:
       context: ./Backend
       dockerfile: Dockerfile
     container_name: book-inventory-backend
-    restart: unless-stopped
     environment:
       PORT: 5000
       DB_HOST: mysql
@@ -44,9 +44,9 @@ services:
     container_name: book-inventory-frontend
     restart: unless-stopped
     ports:
-      - "4173:4173"
+      - "8080:80"
     depends_on:
       - backend
 
 volumes:
-  mysql_data:
+  mysql_data: 
