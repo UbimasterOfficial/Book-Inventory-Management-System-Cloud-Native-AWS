@@ -1,18 +1,28 @@
-FROM node:20-alpine
+# =========================
+# 1. Build Stage
+# =========================
+FROM node:20-alpine AS build
 
 WORKDIR /app
-
-ARG VITE_API_URL=http://localhost:5000/api
-ENV VITE_API_URL=$VITE_API_URL
 
 COPY package*.json ./
 RUN npm ci
 
 COPY . .
+
 RUN npm run build
 
-EXPOSE 4173
 
-USER node
+# =========================
+# 2. Production Stage
+# =========================
+FROM nginx:alpine
 
-CMD ["npm", "exec", "vite", "--", "preview", "--host", "0.0.0.0"]
+# Copy built files from build stage
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose web port
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
