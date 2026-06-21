@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API=import.meta.env.VITE_API_URL;
+const API=(import.meta.env.VITE_API_URL || "http://localhost:5000/api").replace(/\/$/, "");
 
 export default function App() {
   const [books, setBooks] = useState([]);
