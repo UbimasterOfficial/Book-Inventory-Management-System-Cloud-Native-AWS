@@ -43,6 +43,6 @@ app.delete("/api/books/:id", async (req,res)=>{
  res.json({message:"Book deleted"});
 });
 
-app.listen(process.env.PORT || 5000, ()=>{
+app.listen(process.env.PORT || 5000, "0.0.0.0", ()=>{
  console.log("Server running");
 });
